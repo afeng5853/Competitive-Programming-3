@@ -9,7 +9,7 @@ public class ex1_2_3 {
 		//ex1();
 		//ex2();
 		//ex3();
-		//ex4();
+		ex4();
 	}
 	
 	public static void ex1() {
@@ -40,7 +40,7 @@ public class ex1_2_3 {
 	
 	public static void ex4() {
 		Scanner s = new Scanner(System.in);
-		int[] nums = Arrays.stream(s.nextLine().split(" ")).mapToInt(Integer::parseInt).sorted().toArray();
+		int[] nums = Arrays.stream(s.nextLine().split(" ")).mapToInt(Integer::parseInt).distinct().sorted().toArray();
 		for (int num : nums) {
 			System.out.print(num + " ");
 		}
