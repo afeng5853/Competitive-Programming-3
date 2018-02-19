@@ -8,23 +8,27 @@ import java.util.Scanner;
 public class ex1_2_3 {
 	public static void main(String[] args) {
 		//ex1();
-		//ex2(5);
-		//ex3("9 August 2010");
+		//ex2();
+		//ex3();
 	}
 	
 	public static void ex1() {
 		Scanner s = new Scanner(System.in);
 		Double d = s.nextDouble();
 		System.out.printf("%7.3f%n", d);
-		s.close();
 	}
 	
-	public static void ex2(int n) {
+	public static void ex2() {
+		Scanner s = new Scanner(System.in);
+		int n = s.nextInt();
 		System.out.printf("%." + n + "f%n", Math.PI);
 	}
 	
-	public static void ex3(String date) {
-		//Sakamoto's algorithm https://quizlet.com/270356986/sakamatos-algorithm-flash-cards/
+	public static void ex3() {
+		// Example input : "9 August 2010"
+		// Sakamoto's algorithm https://quizlet.com/270356986/sakamatos-algorithm-flash-cards/
+		Scanner s = new Scanner(System.in);
+		String date = s.nextLine();
 		String[] dateA = date.split(" ");
 		int m = Month.valueOf(dateA[1].toUpperCase()).getValue();
 		int d = Integer.parseInt(dateA[0]);
