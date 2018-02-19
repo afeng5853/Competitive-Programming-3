@@ -7,20 +7,20 @@ import java.util.Scanner;
 
 public class ex1_2_3 {
 	public static void main(String[] args) {
-		//ex1(1.4732);
+		//ex1();
 		//ex2(5);
-		ex3("9 August 2010");
+		//ex3("9 August 2010");
 	}
 	
 	public static void ex1() {
 		Scanner s = new Scanner(System.in);
 		Double d = s.nextDouble();
-		System.out.println(String.format("%7.3f", d));
+		System.out.printf("%7.3f%n", d);
 		s.close();
 	}
 	
 	public static void ex2(int n) {
-		System.out.println(String.format("%." + n + "f", Math.PI));
+		System.out.printf("%." + n + "f%n", Math.PI);
 	}
 	
 	public static void ex3(String date) {
