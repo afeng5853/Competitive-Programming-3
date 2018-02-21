@@ -14,6 +14,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Scanner;
 import java.util.Set;
+import java.util.Stack;
 
 public class ex1_2_3 {
 	public static void main(String[] args) throws IOException {
@@ -23,8 +24,10 @@ public class ex1_2_3 {
 		//ex4();
 		//ex5();
 		//ex6();
-		//ex7("", 0);
-		ex8();
+		//ex7();
+		//ex8();
+		//ex9();
+		ex10();
 	}
 	
 	public static void ex1() {
@@ -104,20 +107,87 @@ public class ex1_2_3 {
 		System.out.println(bm.get(Integer.parseInt(s.readLine())));
 	}
 	
-	/* Wrong, it said to generate all permutations of the first 10 letters, not combinations
-	private static String[] letters = new String[] {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J"};
-	public static String ex7(String hitherto, int length) {
-		if (length == 10) {
-			return hitherto;
-		}
-		for (String s : letters) {
-			String res = ex7(hitherto + s, length + 1);
-			if (res != null)
-				System.out.println(res);
-		}
-		return null;
+	private static void swap(char[] str, int i, int j) {
+		char temp = str[i];
+		str[i] = str[j];
+		str[j] = temp;
 	}
-	*/
+	
+	private static void swap(int[] str, int i, int j) {
+		int temp = str[i];
+		str[i] = str[j];
+		str[j] = temp;
+	}
+	
+	private static void printPermutations(char[] str, int n) {
+		if (n == 1) {
+			System.out.println(Arrays.toString(str));
+		} else {
+			for (int i = 0; i < n-1; i++) {
+				printPermutations(str, n-1);
+				if (i % 2 == 0) {
+					swap(str, i, n - 1);
+				}
+				else {
+					swap(str, 0, n - 1);
+				}
+			}
+			printPermutations(str, n-1);
+		}
+	}
+    /*
+     * Alternative to Heap's
+	private static int getLargestMovable(int[] str, int[] dir) {
+		int largest_moveable = -1;
+	    for(int i = 0;i < str.length;i++) {
+	        int moveto = i + dir[i];
+	        if((moveto >= 0 && moveto < str.length) && (str[i] > str[moveto])) {
+	            if(largest_moveable == -1 || str[largest_moveable] < str[i]) {
+	                largest_moveable = i;
+	            }
+	        }
+	    }
+	    return largest_moveable;
+	}
+	
+	private static void sjt(int[] str) {
+		int movingIdx;
+		int[] dir = new int[str.length];
+		
+		for (int i = 0; i < dir.length; i++) {
+			dir[i] = -1;
+		}
+		System.out.println(Arrays.toString(str));
+		while ((movingIdx = getLargestMovable(str, dir)) != -1 ) {
+			for (int i = 0; i < dir.length; i++) {
+				if (str[i] > str[movingIdx]) {
+					dir[i] = dir[i] * -1;
+				}
+			}
+			move(str, dir, movingIdx);
+			System.out.println(Arrays.toString(str));
+		}
+	}
+	
+	private static void move(int[] a, int[] dirs, int moving) {
+	    int tmp;
+	    int moveto = moving + dirs[moving];
+
+	    tmp = a[moving];
+	    a[moving] = a[moveto];
+	    a[moveto] = tmp;
+
+	    tmp = dirs[moving];
+	    dirs[moving] = dirs[moveto];
+	    dirs[moveto] = tmp;
+	}
+     */
+	
+	public static void ex7() {
+		char[] arr = new char[] {'1', '2', '3'};
+		//sjt(arr);
+		printPermutations(arr, arr.length);
+	}
 	
 	private static List<Set<Integer>> powerset(int[] nums) {
 		int binaryRep = 1 << nums.length;
@@ -145,4 +215,31 @@ public class ex1_2_3 {
 			System.out.println(set);
 		}
 	}
+	
+	public static void ex9() throws IOException {
+		BufferedReader r = new BufferedReader(new InputStreamReader(System.in));
+		String[] inputs = r.readLine().split("\\s");
+		int currentBase = Integer.parseInt(inputs[0]);
+		int toBase = Integer.parseInt(inputs[1]);
+		String num = inputs[2];
+		int currentNum = Integer.parseInt(num, currentBase);
+		System.out.println(Long.toString(currentNum, toBase));
+	}
+	
+	public static void ex10() throws IOException {
+		BufferedReader r = new BufferedReader(new InputStreamReader(System.in));
+		System.out.println(r.readLine().replaceAll("\\b[a-z]\\d{2}\\b", "***"));
+	}
+	/*
+	public static void ex11() throws IOException {
+		BufferedReader r = new BufferedReader(new InputStreamReader(System.in));
+		String[] ops = r.readLine().split("\\s");
+		Stack<String> stk = new Stack<String>();
+		for (String s : ops) {
+			if (s.equals(")")) {
+				too much work
+			}
+		}
+	}
+	*/
 }
